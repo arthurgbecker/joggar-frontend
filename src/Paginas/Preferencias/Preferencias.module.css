@@ -1,0 +1,79 @@
+.containerPref {
+  display: flex;
+  flex-direction: column;
+  background-color: #fdfdfd;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+
+  height: 92vh;
+}
+
+.containerPref h1, p {
+  margin: 5px;
+}
+
+.containerPref h2{
+  margin: 40px 0 20px 0;
+  padding: 0 15px 0 15px;
+  color: #FF5834;
+  background-color: #fdfdfd;
+  z-index: 2;
+}
+
+.atividadesPref {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: -2.1rem;
+  padding: 40px 0 30px 110px;
+  border: 1px solid #FF5834;
+  border-radius: 10px;
+
+  z-index: 1;
+}
+
+.atividadesPref input[type="checkbox"] {
+  transform: scale(1.4);
+  margin-right: 8px;
+}
+
+.atividadesPref input[type="checkbox"]:checked {
+  background-color: orange; /* Muda a cor de fundo para laranja quando estiver marcado */
+  border: 1px solid darkorange; /* Adiciona uma borda laranja escura quando estiver marcado */
+}
+
+.column1, .column2, .column3 {
+  width: 20%; /* Cada coluna ocupa 1/3 da largura */
+  box-sizing: border-box;
+  padding: 5px; /* Espaçamento entre as colunas */
+}
+
+.buttonPref {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buttonPref button {
+  background-color: #FF5834;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 14px;
+  color: #fdfdfd;
+  opacity: 1;
+  height: 50px;
+  width: 180px;
+
+  border: 0;
+  border-radius: 2rem;
+
+  margin-top: 55px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.buttonPref button:hover {
+  color: #FF5834;
+  background-color: #100F1C;
+}

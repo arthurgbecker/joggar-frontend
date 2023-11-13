@@ -1,0 +1,119 @@
+.containerCadastro {
+  display: flex;
+  height: 94vh;
+}
+
+.divEsquerda {
+  background-color: #fdfdfd;
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.divEsquerda h2, p {
+  margin: 0 0 5px 0;
+}
+
+.divEsquerda a {
+  color: #FF5834;
+}
+
+.divEsquerda a:hover {
+  color: #FF9441;
+}
+
+.divDireita {
+  background-color: #221E3B;
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+}
+
+.divDireita img {
+  width: 170px;
+  margin-bottom: 20px;
+}
+
+.divDireita ul, li{
+  line-height: 2.5;
+}
+
+.formCadastro {
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 px 4px rgba(0, 0, 0, 0.1);
+}
+
+.formCadastro h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.formCadastro label {
+  margin-bottom: 10px;
+}
+
+.formCadastro input, select {
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.form_row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form_group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form_group input {
+  width: 370px;
+}
+
+.form_group select {
+  width: 387px;
+}
+
+.divButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.formCadastro button {
+  background-color: #FF5834;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 14px;
+  color: #221E3B;
+  opacity: 1;
+  height: 50px;
+  width: 180px;
+
+  border: 0;
+  border-radius: 2rem;
+ 
+  margin: 10px 0 0 0;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.formCadastro button:hover {
+  color: #FF5834;
+  background-color: #100F1C;
+}

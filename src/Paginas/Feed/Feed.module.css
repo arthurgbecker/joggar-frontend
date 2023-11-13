@@ -1,0 +1,37 @@
+.mainFeed {
+    display: flex;
+    height: 91vh;
+}
+
+.menuEsquerdaFeed {
+    width: 21.9%;
+    padding: 28px;
+    background-color: #4B4569;
+    color: white;    
+}
+
+.menuEsquerdaFeed .dropdown {
+    margin-bottom: 10px;
+}
+
+.menuEsquerdaFeed label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.menuEsquerdaFeed select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.menuEsquerdaFeed .icon {
+    color: #FF5834;
+}
+
+.contentFeed {
+    flex: 3;
+    padding: 20px;
+    background-color: aquamarine;
+}

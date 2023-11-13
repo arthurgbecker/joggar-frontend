@@ -1,0 +1,120 @@
+.containerEventos {
+    display: flex;
+    flex-direction: column;
+    background-color: #fdfdfd;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+    height: 94vh;
+}
+
+.containerEventos h2,
+p {
+    margin: 5px;
+}
+
+.containerEventos a {
+    color: #FF5834;
+}
+
+.containerEventos a:hover {
+    color: #FF9441;
+}
+
+.formEventos {
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 px 4px rgba(0, 0, 0, 0.1);
+}
+
+.formEventos h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.formEventos label {
+    margin-bottom: 10px;
+}
+
+.formEventos input, select, textarea {
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.row_one_eventos {
+    display: flex;
+    justify-content: space-between;
+}
+
+.group_one_eventos {
+    display: flex;
+    flex-direction: column;
+}
+
+.group_one_eventos input {
+    width: 233px;
+    padding: 6.5px 6.5px 6.5px 9px;
+}
+
+.group_one_eventos select {
+    width: 250px;
+}
+
+.group_one_eventos .dateInput {
+    padding: 8px 6.5px 8px 9px;
+}
+
+.row_two_eventos {
+    display: flex;
+    justify-content: space-between;
+}
+
+.group_two_eventos {
+    display: flex;
+    flex-direction: column;
+}
+
+/* .group_two_eventos input {
+    width: 370px;
+} */
+
+.group_two_eventos select {
+    width: 250px;
+}
+
+.divButton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formEventos button {
+    background-color: #FF5834;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 14px;
+    color: #221E3B;
+    opacity: 1;
+    height: 50px;
+    width: 180px;
+
+    border: 0;
+    border-radius: 2rem;
+
+    margin: 10px 0 0 0;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.formEventos button:hover {
+    color: #FF5834;
+    background-color: #100F1C;
+}
