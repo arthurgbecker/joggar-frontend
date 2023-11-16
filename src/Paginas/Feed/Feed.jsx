@@ -4,6 +4,9 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHouse, faUserGroup, faCirclePlus, faBell, faUser } from '@fortawesome/free-solid-svg-icons';
 library.add(faHouse, faUserGroup, faCirclePlus, faBell, faUser);
 
+import axios from 'axios';
+import { useEffect } from 'react';
+
 import styles from './Feed.module.css'
 
 const Feed = () => {
@@ -15,8 +18,22 @@ const Feed = () => {
         ["Categoria 1", "Categoria 2", "Categoria 3"],
     ];
 
+    const getAxios = async () => {
+        console.log("teste da api com get")
+    };
+
+    const deleteAxios = async () => {
+        console.log("teste da api com delete")
+    };
+
+    useEffect(() => {
+        getAxios();
+        deleteAxios();
+    }, []);
+
     return (
         <div className={styles.mainFeed}>
+
             <div className={styles.menuEsquerdaFeed}>
 
                 <h2>Buscar Eventos:</h2>
@@ -56,7 +73,7 @@ const Feed = () => {
                         ))}
                     </select>
                 </div>
-                <FontAwesomeIcon className={styles.icon} icon={faHouse} size='lg'/>
+                <FontAwesomeIcon className={styles.icon} icon={faHouse} size='lg' />
             </div>
 
             <div className={styles.contentFeed}>

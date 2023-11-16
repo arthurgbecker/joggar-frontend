@@ -1,72 +1,95 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom"
-
-import styles from './Eventos.module.css'
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import styles from './Eventos.module.css';
 
 const Eventos = () => {
-    const [title, setTitle] = useState('');
-    const [coverImage, setCoverImage] = useState('');
-    const [date, setDate] = useState('');
-    const [time, setTime] = useState('');
-    const [address, setAddress] = useState('');
-    const [privacy, setPrivacy] = useState('public');
-    const [description, setDescription] = useState('');
-    const [activity, setActivity] = useState('football');
-    const [audience, setAudience] = useState('openToAll');
-    const [activityType, setActivityType] = useState('presencial');
+    
+    const [formData, setFormData] = useState({
+        titleEvento: '',
+        imageEvento: '',
+        dateEvento: '',
+        timeEvento: '',
+        addressEvento: '',
+        privacyEvento: 'public',
+        descriptionEvento: '',
+        activityEvento: 'football',
+        audienceEvento: 'openToAll',
+        activityTypeEvento: 'presencial',
+    });
 
-    const handleCheckboxChange = (event) => {
-        const { name, checked } = event.target;
-        setType({
-            ...type,
-            [name]: checked,
-        });
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        // Aqui você pode adicionar a lógica para lidar com os dados do formulário de criação de evento
-        console.log('Dados do evento:', {
-            title,
-            coverImage,
-            date,
-            time,
-            address,
-            privacy,
-            description,
-            audience,
-            activity,
-            type,
-        });
+    
+        try {
+            const response = await axios.post('http://localhost:8080/eventos', formData);
+    
+            // Lógica adicional após a criação do evento (se necessário)
+            console.log('Evento criado:', response.data);
+        } catch (error) {
+            console.error('Erro ao criar evento:', error);
+        }
     };
 
     return (
         <div className={styles.containerEventos}>
-
             <h2>CRIAR EVENTO</h2>
-            <p>Fez uma curva errada? Retorne para a <a href="/feed">home aqui.</a></p>
+            <p>
+                Fez uma curva errada? Retorne para a{' '}
+                <Link to="/feed">home aqui.</Link>
+            </p>
 
             <form className={styles.formEventos} onSubmit={handleSubmit}>
                 <label>Título:</label>
-                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                <input
+                    type="text"
+                    name="titleEvento"
+                    value={formData.titleEvento}
+                    onChange={handleInputChange}
+                />
 
                 <label>Imagem de Capa (URL):</label>
-                <input type="url" value={coverImage} onChange={(e) => setCoverImage(e.target.value)} />
+                <input
+                    type="url"
+                    name="imageEvento"
+                    value={formData.imageEvento}
+                    onChange={handleInputChange}
+                />
 
                 <div className={styles.row_one_eventos}>
                     <div className={styles.group_one_eventos}>
                         <label>Data:</label>
-                        <input type="date" className={styles.dateInput} value={date} onChange={(e) => setDate(e.target.value)} />
+                        <input
+                            type="date"
+                            className={styles.dateEventoInput}
+                            name="dateEvento"
+                            value={formData.dateEvento}
+                            onChange={handleInputChange}
+                        />
                     </div>
 
                     <div className={styles.group_one_eventos}>
                         <label>Horário:</label>
-                        <input type="time" value={time} onChange={(e) => setTime(e.target.value)} />
+                        <input
+                            type="time"
+                            name="timeEvento"
+                            value={formData.timeEvento}
+                            onChange={handleInputChange}
+                        />
                     </div>
 
                     <div className={styles.group_one_eventos}>
                         <label>Privacidade:</label>
-                        <select value={privacy} onChange={(e) => setPrivacy(e.target.value)}>
+                        <select
+                            name="privacyEvento"
+                            value={formData.privacyEvento}
+                            onChange={handleInputChange}
+                        >
                             <option value="public">Público</option>
                             <option value="private">Privado</option>
                         </select>
@@ -74,112 +97,64 @@ const Eventos = () => {
                 </div>
 
                 <label>Endereço:</label>
-                <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
+                <input
+                    type="text"
+                    name="address"
+                    value={formData.address}
+                    onChange={handleInputChange}
+                />
 
                 <label>Descrição:</label>
-                <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
+                <textarea
+                    name="descriptionEvento"
+                    value={formData.descriptionEvento}
+                    onChange={handleInputChange}
+                />
 
                 <div className={styles.row_two_eventos}>
                     <div className={styles.group_two_eventos}>
                         <label>Atividade:</label>
-                        <select value={activity} onChange={(e) => setActivity(e.target.value)}>
+                        <select
+                            name="activityEvento"
+                            value={formData.activityEvento}
+                            onChange={handleInputChange}
+                        >
                             <option value="football">Futebol</option>
                             <option value="volleyball">Vôlei</option>
                             <option value="cycling">Ciclismo</option>
-                        </select>                    </div>
+                        </select>
+                    </div>
                     <div className={styles.group_two_eventos}>
                         <label>Público:</label>
-                        <select value={audience} onChange={(e) => setAudience(e.target.value)}>
+                        <select
+                            name="audienceEvento"
+                            value={formData.audienceEvento}
+                            onChange={handleInputChange}
+                        >
                             <option value="male">Masculino</option>
                             <option value="female">Feminino</option>
                             <option value="openToAll">Aberto a Todos</option>
-                        </select>                    </div>
+                        </select>
+                    </div>
                     <div className={styles.group_two_eventos}>
                         <label>Tipo:</label>
-                        <select value={activityType} onChange={(e) => setActivityType(e.target.value)}>
+                        <select
+                            name="activityTypeEvento"
+                            value={formData.activityTypeEvento}
+                            onChange={handleInputChange}
+                        >
                             <option value="presencial">Presencial</option>
                             <option value="virtual">Virtual</option>
-                        </select>                    </div>
+                        </select>
+                    </div>
                 </div>
 
                 <div className={styles.divButton}>
-                    <Link to="/preferencias">
-                        <button type="submit">Salvar</button>
-                    </Link>
+                    <button onClick={handleSubmit}>Salvar</button>
                 </div>
             </form>
-
         </div>
     );
-
-    // return (
-    //     <div className={styles.container}>
-    //         <h1>Criar Evento</h1>
-    //         <form onSubmit={handleSubmit}>
-    //             <label>
-    //                 Título:
-    //                 <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-    //             </label>
-    //             <label>
-    //                 Imagem de Capa (URL):
-    //                 <input type="url" value={coverImage} onChange={(e) => setCoverImage(e.target.value)} />
-    //             </label>
-    //             <div className={styles.date_time_row}> {/* Nova div para agrupar Data e Horário */}
-    //                 <label>
-    //                     Data:
-    //                     <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
-    //                 </label>
-    //                 <label>
-    //                     Horário:
-    //                     <input type="time" value={time} onChange={(e) => setTime(e.target.value)} />
-    //                 </label>
-    //             </div>
-    //             <label>
-    //                 Endereço:
-    //                 <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
-    //             </label>
-    //             <label>
-    //                 Privacidade:
-    //                 <select value={privacy} onChange={(e) => setPrivacy(e.target.value)}>
-    //                     <option value="public">Público</option>
-    //                     <option value="private">Privado</option>
-    //                 </select>
-    //             </label>
-    //             <label>
-    //                 Descrição:
-    //                 <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
-    //             </label>
-    //             <div className={styles.activity_public_type_row}>
-    //                 <label>
-    //                     Atividade:
-    //                     <select value={activity} onChange={(e) => setActivity(e.target.value)}>
-    //                         <option value="football">Futebol</option>
-    //                         <option value="volleyball">Vôlei</option>
-    //                         <option value="cycling">Ciclismo</option>
-    //                     </select>
-    //                 </label>
-    //                 <label>
-    //                     Público:
-    //                     <select value={audience} onChange={(e) => setAudience(e.target.value)}>
-    //                         <option value="male">Masculino</option>
-    //                         <option value="female">Feminino</option>
-    //                         <option value="openToAll">Aberto a Todos</option>
-    //                     </select>
-    //                 </label>
-    //                 <label>
-    //                     Tipo:
-    // <select value={activityType} onChange={(e) => setActivityType(e.target.value)}>
-    //     <option value="presencial">Presencial</option>
-    //     <option value="virtual">Virtual</option>
-    // </select>
-    //                 </label>
-    //             </div>
-    //             <Link to={`/feed`}>
-    //                 <button type="submit">Entrar</button>
-    //             </Link>
-    //         </form>
-    //     </div>
-    // );
 };
 
 export default Eventos;
