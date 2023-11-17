@@ -6,16 +6,16 @@ import styles from './Eventos.module.css';
 const Eventos = () => {
     
     const [formData, setFormData] = useState({
-        titleEvento: '',
-        imageEvento: '',
-        dateEvento: '',
-        timeEvento: '',
-        addressEvento: '',
-        privacyEvento: 'public',
-        descriptionEvento: '',
-        activityEvento: 'football',
-        audienceEvento: 'openToAll',
-        activityTypeEvento: 'presencial',
+        tituloEvento: '',
+        imagemEvento: '',
+        dataEvento: '',
+        horaEvento: '',
+        endereco: '',
+        privacidadeEvento: 'public',
+        descricaoEvento: '',
+        atividade: 'football',
+        publicoEvento: 'openToAll',
+        tipo: 'presencial',
     });
 
     const handleInputChange = (e) => {
@@ -25,7 +25,11 @@ const Eventos = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-    
+        const atividades = { 
+            "Vôlei": "VOLEI"
+
+        }
+        formData.atividade = atividades[formData.atividade]
         try {
             const response = await axios.post('http://localhost:8080/eventos', formData);
     
@@ -48,16 +52,16 @@ const Eventos = () => {
                 <label>Título:</label>
                 <input
                     type="text"
-                    name="titleEvento"
-                    value={formData.titleEvento}
+                    name="tituloEvento"
+                    value={formData.tituloEvento}
                     onChange={handleInputChange}
                 />
 
                 <label>Imagem de Capa (URL):</label>
                 <input
                     type="url"
-                    name="imageEvento"
-                    value={formData.imageEvento}
+                    name="imagemEvento"
+                    value={formData.imagemEvento}
                     onChange={handleInputChange}
                 />
 
@@ -66,9 +70,9 @@ const Eventos = () => {
                         <label>Data:</label>
                         <input
                             type="date"
-                            className={styles.dateEventoInput}
-                            name="dateEvento"
-                            value={formData.dateEvento}
+                            className={styles.dataEventoInput}
+                            name="dataEvento"
+                            value={formData.dataEvento}
                             onChange={handleInputChange}
                         />
                     </div>
@@ -77,8 +81,8 @@ const Eventos = () => {
                         <label>Horário:</label>
                         <input
                             type="time"
-                            name="timeEvento"
-                            value={formData.timeEvento}
+                            name="horaEvento"
+                            value={formData.horaEvento}
                             onChange={handleInputChange}
                         />
                     </div>
@@ -86,8 +90,8 @@ const Eventos = () => {
                     <div className={styles.group_one_eventos}>
                         <label>Privacidade:</label>
                         <select
-                            name="privacyEvento"
-                            value={formData.privacyEvento}
+                            name="privacidadeEvento"
+                            value={formData.privacidadeEvento}
                             onChange={handleInputChange}
                         >
                             <option value="public">Público</option>
@@ -99,15 +103,15 @@ const Eventos = () => {
                 <label>Endereço:</label>
                 <input
                     type="text"
-                    name="address"
-                    value={formData.address}
+                    name="endereco"
+                    value={formData.endereco}
                     onChange={handleInputChange}
                 />
 
                 <label>Descrição:</label>
                 <textarea
-                    name="descriptionEvento"
-                    value={formData.descriptionEvento}
+                    name="descricaoEvento"
+                    value={formData.descricaoEvento}
                     onChange={handleInputChange}
                 />
 
@@ -115,8 +119,8 @@ const Eventos = () => {
                     <div className={styles.group_two_eventos}>
                         <label>Atividade:</label>
                         <select
-                            name="activityEvento"
-                            value={formData.activityEvento}
+                            name="atividade"
+                            value={formData.atividade}
                             onChange={handleInputChange}
                         >
                             <option value="football">Futebol</option>
@@ -127,8 +131,8 @@ const Eventos = () => {
                     <div className={styles.group_two_eventos}>
                         <label>Público:</label>
                         <select
-                            name="audienceEvento"
-                            value={formData.audienceEvento}
+                            name="publicoEvento"
+                            value={formData.publicoEvento}
                             onChange={handleInputChange}
                         >
                             <option value="male">Masculino</option>
@@ -139,8 +143,8 @@ const Eventos = () => {
                     <div className={styles.group_two_eventos}>
                         <label>Tipo:</label>
                         <select
-                            name="activityTypeEvento"
-                            value={formData.activityTypeEvento}
+                            name="tipo"
+                            value={formData.tipo}
                             onChange={handleInputChange}
                         >
                             <option value="presencial">Presencial</option>
