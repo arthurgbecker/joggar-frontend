@@ -4,35 +4,45 @@ import axios from 'axios';
 import styles from './Eventos.module.css';
 
 const Eventos = () => {
-    
     const [formData, setFormData] = useState({
         tituloEvento: '',
         imagemEvento: '',
         dataEvento: '',
         horaEvento: '',
-        endereco: '',
-        privacidadeEvento: 'public',
+        endereco: {
+            local: '',
+        },
+        privacidadeEvento: 'publico',
         descricaoEvento: '',
-        atividade: 'football',
-        publicoEvento: 'openToAll',
-        tipo: 'presencial',
+        atividade: 'FUTEBOL',
+        publicoEvento: 'abertoATodos',
+        tipo: 'PRESENCIAL',
     });
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+
+        // Faça uma cópia profunda do estado
+        const updatedFormData = { ...formData };
+
+        // Atualize o estado para campos aninhados
+        if (name.includes('.')) {
+            const [nestedField, subField] = name.split('.');
+            updatedFormData[nestedField] = { ...updatedFormData[nestedField], [subField]: value };
+        } else {
+            updatedFormData[name] = value;
+        }
+
+        // Atualize o estado com a cópia atualizada
+        setFormData(updatedFormData);
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const atividades = { 
-            "Vôlei": "VOLEI"
 
-        }
-        formData.atividade = atividades[formData.atividade]
         try {
             const response = await axios.post('http://localhost:8080/eventos', formData);
-    
+
             // Lógica adicional após a criação do evento (se necessário)
             console.log('Evento criado:', response.data);
         } catch (error) {
@@ -94,17 +104,17 @@ const Eventos = () => {
                             value={formData.privacidadeEvento}
                             onChange={handleInputChange}
                         >
-                            <option value="public">Público</option>
-                            <option value="private">Privado</option>
+                            <option value="publico">Público</option>
+                            <option value="privado">Privado</option>
                         </select>
                     </div>
                 </div>
 
-                <label>Endereço:</label>
+                <label>Local:</label>
                 <input
                     type="text"
-                    name="endereco"
-                    value={formData.endereco}
+                    name="endereco.local"
+                    value={formData.endereco.local}
                     onChange={handleInputChange}
                 />
 
@@ -123,9 +133,19 @@ const Eventos = () => {
                             value={formData.atividade}
                             onChange={handleInputChange}
                         >
-                            <option value="football">Futebol</option>
-                            <option value="volleyball">Vôlei</option>
-                            <option value="cycling">Ciclismo</option>
+                            <option value="FUTEBOL">Futebol</option>
+                            <option value="VOLEI">Vôlei</option>
+                            <option value="BASQUETE">Basquete</option>
+                            <option value="CORRIDA">Corrida</option>
+                            <option value="CAPOEIRA">Capoeira</option>
+                            <option value="CICLISMO">Ciclismo</option>
+                            <option value="MUSCULACAO">Musculação</option>
+                            <option value="RPG">RPG</option>
+                            <option value="ACAO">Ação</option>
+                            <option value="MMO">MMO</option>
+                            <option value="MOBA">MOBA</option>
+                            <option value="ESPORTES">Esportes</option>
+                            <option value="LUTA">Luta</option>
                         </select>
                     </div>
                     <div className={styles.group_two_eventos}>
@@ -135,9 +155,9 @@ const Eventos = () => {
                             value={formData.publicoEvento}
                             onChange={handleInputChange}
                         >
-                            <option value="male">Masculino</option>
-                            <option value="female">Feminino</option>
-                            <option value="openToAll">Aberto a Todos</option>
+                            <option value="masculino">Masculino</option>
+                            <option value="feminino">Feminino</option>
+                            <option value="abertoATodos">Aberto a Todos</option>
                         </select>
                     </div>
                     <div className={styles.group_two_eventos}>
@@ -147,8 +167,8 @@ const Eventos = () => {
                             value={formData.tipo}
                             onChange={handleInputChange}
                         >
-                            <option value="presencial">Presencial</option>
-                            <option value="virtual">Virtual</option>
+                            <option value="PRESENCIAL">Presencial</option>
+                            <option value="VIRTUAL">Virtual</option>
                         </select>
                     </div>
                 </div>
