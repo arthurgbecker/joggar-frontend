@@ -21,22 +21,22 @@ const Feed = () => {
         console.log(result.data);
     }
 
-    // useEffect(() => {
-    //     const fetchEventos = async () => {
-    //         try {
-    //             const response = await axios.get('http://localhost:3306/eventos');
-    //             if (response.data.length > 0) {
-    //                 setEventos(response.data);
-    //             } else {
-    //                 console.log('Nenhum evento encontrado.');
-    //             }
-    //         } catch (error) {
-    //             console.error('Erro ao obter eventos:', error);
-    //         }
-    //     };
+    useEffect(() => {
+        const fetchEventos = async () => {
+            try {
+                const response = await axios.get('http://localhost:8080/eventos');
+                if (response.data.length > 0) {
+                    setEventos(response.data);
+                } else {
+                    console.log('Nenhum evento encontrado.');
+                }
+            } catch (error) {
+                console.error('Erro ao obter eventos:', error);
+            }
+        };
 
-    //     fetchEventos();
-    // }, []);
+        fetchEventos();
+    }, []);
 
     const dropdownOptions = [
         ["Opção 1", "Opção 2", "Opção 3"],
