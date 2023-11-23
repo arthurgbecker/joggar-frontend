@@ -9,6 +9,7 @@ import NavBarPlus from './Componentes/NavBarPlus/NavBarPlus'
 import Feed from './Paginas/Feed/Feed'
 import Usuario from './Paginas/Usuario/Usuario'
 import CadastroUsuario from './Paginas/Cadastro Usuario/CadastroUsuario'
+import EditEvents from './Paginas/Eventos/EditEvents'
 
 function App() {
 
@@ -25,6 +26,8 @@ function App() {
             <Route path='/feed' element={<Feed />} />
             <Route path='/usuario' element={<Usuario />} />
             <Route path='/eventos' element={<Eventos />} />
+
+            <Route exact path="/editevents/:id" element={<EditEvents/>}/>
           </Routes>
         </div>
       </div>
