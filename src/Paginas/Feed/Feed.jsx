@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHouse, faUserGroup, faCirclePlus, faBell, faUser } from '@fortawesome/free-solid-svg-icons';
@@ -59,6 +60,12 @@ const Feed = () => {
     //     deleteAxios();
     // }, []);
 
+    // Função para deletar um evento
+    const deleteEvento = async (id) => {
+        await axios.delete(`http://localhost:8080/eventos/${id}`);
+        loadEventos();
+    }
+
     return (
         <div className={styles.mainFeed}>
 
@@ -104,6 +111,8 @@ const Feed = () => {
                 <FontAwesomeIcon className={styles.icon} icon={faHouse} size='lg' />
             </div>
 
+
+
             <div className={styles.contentFeed}>
 
                 {eventos.map((evento) => (
@@ -111,6 +120,13 @@ const Feed = () => {
                         <h3>{evento.tituloEvento}</h3>
                         <p>Data: {evento.dataEvento}</p>
                         <p>Descrição: {evento.descricaoEvento}</p>
+
+                        <Link className='btn btn-outline-primary mx-2' to={`/editevents/${evento.id}`}>
+                            Editar
+                        </Link>
+                        <button className='btn btn-danger mx-2' onClick={() => deleteEvento(evento.id)}>
+                            Deletar
+                        </button>
                     </div>
                 ))}
             </div>
