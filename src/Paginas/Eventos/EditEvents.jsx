@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
+import styles from './Eventos.module.css';
+
 
 const EditEvents = () => {
     const { id } = useParams();
@@ -10,7 +12,13 @@ const EditEvents = () => {
         dataEvento: '',
         horaEvento: '',
         descricaoEvento: '',
-        // Adicione mais atributos conforme necessário
+        endereco: {
+            local: '',
+        },
+        privacidadeEvento: '',
+        atividade: '',
+        publicoEvento: '',
+        tipo: '',
     });
 
     useEffect(() => {
@@ -55,85 +63,58 @@ const EditEvents = () => {
     };
 
     return (
-        <div>
-            <h1>Edit Evento</h1>
-            <form>
-                <label htmlFor="tituloEvento">Title:</label>
+
+        <div className={styles.containerEventos}>
+            <h2>EDITAR EVENTO</h2>
+            <p>
+                Fez uma curva errada? Retorne para o seu{' '}
+                <Link to="/feed">feed aqui.</Link>
+            </p>
+
+            <form className={styles.formEventos} onSubmit={handleSave}>
+                <label htmlFor="tituloEvento">Título:</label>
                 <input
                     type="text"
-                    id="tituloEvento"
                     name="tituloEvento"
                     value={evento.tituloEvento}
                     onChange={handleInputChange}
                 />
 
-                <label htmlFor="dataEvento">Date:</label>
-                <input
-                    type="date"
-                    id="dataEvento"
-                    name="dataEvento"
-                    value={evento.dataEvento}
-                    onChange={handleInputChange}
-                />
-
-                <label htmlFor="descricaoEvento">Description:</label>
-                <textarea
-                    id="descricaoEvento"
-                    name="descricaoEvento"
-                    value={evento.descricaoEvento}
-                    onChange={handleInputChange}
-                ></textarea>
-
-                {/* Adicione mais campos de entrada para outros atributos do evento */}
-
-                <button type="button" onClick={handleSave}>
-                    Save
-                </button>
-            </form>
-            <form className={styles.formEventos} onSubmit={handleSubmit}>
-                <label>Título:</label>
-                <input
-                    type="text"
-                    name="tituloEvento"
-                    value={formData.tituloEvento}
-                    onChange={handleInputChange}
-                />
-
-                <label>Imagem de Capa (URL):</label>
+                <label htmlFor="imagemEvento">Imagem de Capa (URL):</label>
                 <input
                     type="url"
                     name="imagemEvento"
-                    value={formData.imagemEvento}
+                    value={evento.imagemEvento}
                     onChange={handleInputChange}
                 />
 
                 <div className={styles.row_one_eventos}>
                     <div className={styles.group_one_eventos}>
-                        <label>Data:</label>
+                        <label htmlFor="dataEvento">Data:</label>
                         <input
                             type="date"
                             className={styles.dataEventoInput}
                             name="dataEvento"
-                            value={formData.dataEvento}
+                            value={evento.dataEvento}
                             onChange={handleInputChange}
                         />
                     </div>
 
                     <div className={styles.group_one_eventos}>
-                        <label>Horário:</label>
+                        <label htmlFor="horaEvento">Horário:</label>
                         <input
                             type="time"
                             name="horaEvento"
-                            value={formData.horaEvento}
+                            value={evento.horaEvento}
                             onChange={handleInputChange}
                         />
                     </div>
 
                     <div className={styles.group_one_eventos}>
-                        <label>Privacidade:</label>
+                        <label htmlFor="privacidadeEvento">Privacidade:</label>
                         <select
                             name="privacidadeEvento"
-                            value={formData.privacidadeEvento}
+                            value={evento.privacidadeEvento}
                             onChange={handleInputChange}
                         >
                             <option value="publico">Público</option>
@@ -142,27 +123,27 @@ const EditEvents = () => {
                     </div>
                 </div>
 
-                <label>Local:</label>
+                <label htmlFor="endereco.local">Local:</label>
                 <input
                     type="text"
                     name="endereco.local"
-                    value={formData.endereco.local}
+                    value={evento.endereco ? evento.endereco.local : ''}
                     onChange={handleInputChange}
                 />
 
-                <label>Descrição:</label>
+                <label htmlFor="descricaoEvento">Descrição:</label>
                 <textarea
                     name="descricaoEvento"
-                    value={formData.descricaoEvento}
+                    value={evento.descricaoEvento}
                     onChange={handleInputChange}
                 />
 
                 <div className={styles.row_two_eventos}>
                     <div className={styles.group_two_eventos}>
-                        <label>Atividade:</label>
+                        <label htmlFor="atividade">Atividade:</label>
                         <select
                             name="atividade"
-                            value={formData.atividade}
+                            value={evento.atividade}
                             onChange={handleInputChange}
                         >
                             <option value="FUTEBOL">Futebol</option>
@@ -181,10 +162,10 @@ const EditEvents = () => {
                         </select>
                     </div>
                     <div className={styles.group_two_eventos}>
-                        <label>Público:</label>
+                        <label htmlFor="publicoEvento">Público:</label>
                         <select
                             name="publicoEvento"
-                            value={formData.publicoEvento}
+                            value={evento.publicoEvento}
                             onChange={handleInputChange}
                         >
                             <option value="masculino">Masculino</option>
@@ -193,10 +174,10 @@ const EditEvents = () => {
                         </select>
                     </div>
                     <div className={styles.group_two_eventos}>
-                        <label>Tipo:</label>
+                        <label htmlFor="tipo">Tipo:</label>
                         <select
                             name="tipo"
-                            value={formData.tipo}
+                            value={evento.tipo}
                             onChange={handleInputChange}
                         >
                             <option value="PRESENCIAL">Presencial</option>
@@ -206,7 +187,7 @@ const EditEvents = () => {
                 </div>
 
                 <div className={styles.divButton}>
-                    <button onClick={handleSubmit}>Salvar</button>
+                    <button onClick={handleSave}>Salvar</button>
                 </div>
             </form>
         </div>
