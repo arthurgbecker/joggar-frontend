@@ -7,7 +7,7 @@
     width: 21.9%;
     padding: 28px;
     background-color: #4B4569;
-    color: white;    
+    color: white;
 }
 
 .menuEsquerdaFeed .dropdown {
@@ -33,13 +33,41 @@
 .contentFeed {
     flex: 3;
     padding: 20px;
-    background-color: aquamarine;
+    background-color: #A4A1B3;
 }
 
+.card {}
+
 .card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    /* Centraliza verticalmente */
+
     border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
+    padding: 0 20px 12px 20px;
     border-radius: 5px;
     background-color: #f8f8f8;
+
+    margin-bottom: 10px;
+}
+
+.card h2 {
+    margin: 15px 0 10px 0;
+}
+
+.cardEsquerda {
+    flex: 1;
+}
+
+.cardDireita {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.cardDireita a,
+.cardDireita button {
+    margin-bottom: 8px;
 }

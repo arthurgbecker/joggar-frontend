@@ -1,4 +1,4 @@
-// import styles from './App.module.css'
+import styles from './App.module.css'
 import Home from './Paginas/Home/Home'
 // import NavBar from './Componentes/NavBar/NavBar'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'

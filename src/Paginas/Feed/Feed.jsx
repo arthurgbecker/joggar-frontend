@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHouse, faUserGroup, faCirclePlus, faBell, faUser } from '@fortawesome/free-solid-svg-icons';
-library.add(faHouse, faUserGroup, faCirclePlus, faBell, faUser);
+import { faHouse, faUserGroup, faCirclePlus, faBell, faUser, faClock, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+// library.add(faHouse, faUserGroup, faCirclePlus, faBell, faUser);
 
 import axios from 'axios';
-import styles from './Feed.module.css'
+import FormatoData from '../../Componentes/FormatoData/FormatoData';
+import styles from './Feed.module.css';
 
 const Feed = () => {
 
@@ -116,17 +117,26 @@ const Feed = () => {
             <div className={styles.contentFeed}>
 
                 {eventos.map((evento) => (
-                    <div key={evento.id} className={styles.card}>
-                        <h3>{evento.tituloEvento}</h3>
-                        <p>Data: {evento.dataEvento}</p>
-                        <p>Descrição: {evento.descricaoEvento}</p>
 
-                        <Link className='btn btn-outline-primary mx-2' to={`/editevents/${evento.id}`}>
-                            Editar
-                        </Link>
-                        <button className='btn btn-danger mx-2' onClick={() => deleteEvento(evento.id)}>
-                            Deletar
-                        </button>
+
+
+                    <div key={evento.id} className={styles.card}>
+
+                        <div className={styles.cardEsquerda}>
+                            <h2>{evento.tituloEvento}</h2>
+                            <p>Descrição: {evento.descricaoEvento}</p>
+                            <p><FontAwesomeIcon icon={faClock} /> <FormatoData dataEvento={evento.dataEvento} />, às {evento.horaEvento} |&nbsp; 
+                                <FontAwesomeIcon icon={faLocationDot} /> {evento.endereco.local}</p>
+                        </div>
+                        <div className={styles.cardDireita}>
+
+                            <Link className='btn btn-outline-primary mx-2' to={`/editevents/${evento.id}`}>
+                                Editar
+                            </Link>
+                            <button className='btn btn-danger mx-2' onClick={() => deleteEvento(evento.id)}>
+                                Deletar
+                            </button>
+                        </div>
                     </div>
                 ))}
             </div>
