@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from "react-router-dom";
+import { useParams, Link } from 'react-router-dom';
 import logoImageV from '/src/Assets/Imagens/logo_joggar-vertical.png';
 
 import styles from './CadastroUsuario.module.css'
 
-const CadastroUsuario = () => {
-    const navigate = useNavigate(); // Adiciona o hook useNavigate
+const EditUsuario = () => {
 
-    const [formData, setFormData] = useState({
+    const { id } = useParams();
+    const [usuario, setUsuario] = useState({
         nome: '',
         nascimento: '',
         generoUsuario: 'outro',
@@ -18,38 +18,44 @@ const CadastroUsuario = () => {
         isAdmin: ''
     });
 
+    useEffect(() => {
+        const fetchUusario = async () => {
+            try {
+                const response = await axios.get(`http://localhost:8080/usuarios/${id}`);
+                const usuarioData = response.data;
+                setUsuario(usuarioData);
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        };
+        fetchUusario();
+    }, [id]);
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-
-        // Faça uma cópia profunda do estado
-        const updatedFormData = { ...formData };
-
-        // Atualize o estado para campos aninhados
-        if (name.includes('.')) {
-            const [nestedField, subField] = name.split('.');
-            updatedFormData[nestedField] = { ...updatedFormData[nestedField], [subField]: value };
-        } else {
-            updatedFormData[name] = value;
-        }
-
-        // Atualize o estado com a cópia atualizada
-        setFormData(updatedFormData);
+        setUsuario((precUsuario) => ({
+            ...precUsuario,
+            [name]: value,
+        }));
     };
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    const handleSave = async (e) => {
+        e.preventDefault();
+        const updateUsuario = async () => {
+            try {
+                // Verifique se a URL está correta e se o evento contém os dados corretos
+                console.log(`URL: http://localhost:8080/usuarios/${id}`);
+                console.log('Usuário data:', usuario);
 
-        try {
-            const response = await axios.post('http://localhost:8080/usuarios', formData);
+                const response = await axios.put(`http://localhost:8080/usuarios/${id}`, usuario);
+                console.log('Response:', response.data);
+                console.log('Usuário alterado com sucesso!');
+            } catch (error) {
+                console.error('Error updating usuário:', error);
+            }
+        };
 
-            // Lógica adicional após a criação do evento (se necessário)
-            console.log('Cadastro criado com sucesso:', response.data);
-            alert('Login efetuado com sucesso');
-
-            navigate('/preferencias');
-        } catch (error) {
-            console.error('Erro ao cadastrar:', error);
-        }
+        updateUsuario();
     };
 
 
@@ -57,22 +63,25 @@ const CadastroUsuario = () => {
         <div className={styles.containerCadastro}>
             <div className={styles.divEsquerda}>
 
-                <h2>CRIE SUA CONTA</h2>
-                <p>Já possui uma conta? Faça <a href="/login">login aqui.</a></p>
+                <h2>EDITAR DADOS DA CONTA</h2>
+                <p>
+                    Fez uma curva errada? Retorne para o seu{' '}
+                    <Link to="/feed">feed aqui.</Link>
+                </p>
 
-                <form className={styles.formCadastro} onSubmit={handleSubmit}>
+                <form className={styles.formCadastro} onSubmit={handleSave}>
                     <label>Nome:</label>
                     <input
                         type="text"
                         name="nome"
-                        value={formData.nome}
+                        value={usuario.nome}
                         onChange={handleInputChange}
                     />
                     <label>E-mail:</label>
                     <input
                         type="text"
                         name="email"
-                        value={formData.email}
+                        value={usuario.email}
                         onChange={handleInputChange}
                     />
 
@@ -82,7 +91,7 @@ const CadastroUsuario = () => {
                             <input
                                 type="date"
                                 name="nascimento"
-                                value={formData.nascimento}
+                                value={usuario.nascimento}
                                 onChange={handleInputChange}
                             />
                         </div>
@@ -92,7 +101,7 @@ const CadastroUsuario = () => {
                             <select
                                 type="text"
                                 name="generoUsuario"
-                                value={formData.generoUsuario}
+                                value={usuario.generoUsuario}
                                 onChange={handleInputChange}
                             >
                                 <option value="masculino">Masculino</option>
@@ -106,7 +115,7 @@ const CadastroUsuario = () => {
                     <input
                         type="text"
                         name="telefone"
-                        value={formData.telefone}
+                        value={usuario.telefone}
                         onChange={handleInputChange}
                     />
 
@@ -116,7 +125,7 @@ const CadastroUsuario = () => {
                             <input
                                 type="password"
                                 name="senha"
-                                value={formData.senha}
+                                value={usuario.senha}
                                 onChange={handleInputChange}
                             />                        </div>
                         <div className={styles.form_group}>
@@ -126,12 +135,12 @@ const CadastroUsuario = () => {
                                 name="confirmaSenha"
                             />
                         </div>
-                        
+
                         <label>ADM:</label>
                         <input
                             type="checkbox"
                             name="isAdmin"
-                            value={formData.isAdmin}
+                            value={usuario.isAdmin}
                             onChange={handleInputChange}
                         >
                         </input>
@@ -140,7 +149,7 @@ const CadastroUsuario = () => {
 
                     <div className={styles.divButton}>
                         <Link to="/preferencias">
-                            <button onClick={handleSubmit}>Salvar</button>
+                            <button onClick={handleSave}>Salvar</button>
                         </Link>
                     </div>
                 </form>
@@ -148,15 +157,11 @@ const CadastroUsuario = () => {
 
             <div className={styles.divDireita}>
                 <img src={logoImageV} alt="Logo JOGGAR" />
-                <ul>
-                    <li>Marque jogos com seus amigos.</li>
-                    <li>Eventos presenciais e virtuais.</li>
-                    <li>Busque eventos perto de você.</li>
-                    <li>Tudo rápido e direto ao ponto!</li>
-                </ul>
+
             </div>
         </div>
     );
-};
 
-export default CadastroUsuario;
+}
+
+export default EditUsuario;

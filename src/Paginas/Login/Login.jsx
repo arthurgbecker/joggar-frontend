@@ -1,46 +1,80 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from 'react';
-
-import styles from './Login.module.css'
+import axios from 'axios';
+import styles from './Login.module.css';
 
 const Login = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const navigate = useNavigate(); // Adiciona o hook useNavigate
 
-    const handleUsernameChange = (event) => {
-        setUsername(event.target.value);
+    const [formData, setFormData] = useState({
+        email: '',
+        senha: '',
+    });
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        const updatedFormData = { ...formData };
+
+        if (name.includes('.')) {
+            const [nestedField, subField] = name.split('.');
+            updatedFormData[nestedField] = { ...updatedFormData[nestedField], [subField]: value };
+        } else {
+            updatedFormData[name] = value;
+        }
+
+        setFormData(updatedFormData);
     };
 
-    const handlePasswordChange = (event) => {
-        setPassword(event.target.value);
-    };
-
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        // Aqui você pode adicionar a lógica para verificar o nome de usuário e a senha
-        console.log('Username:', username);
-        console.log('Password:', password);
+
+        try {
+            const response = await axios.post('http://localhost:8080/login', formData);
+
+            console.log('Login efetuado com sucesso', response.data);
+            alert('Login efetuado com sucesso');
+
+            // Redireciona para a página '/feed'
+            navigate('/feed');
+            
+        } catch (error) {
+            console.error('Erro ao realizar o login:', error);
+        }
     };
 
     return (
-        <div className={styles.container}>
-            <form className={styles.form} onSubmit={handleSubmit}>
+        <div className={styles.containerLogin}>
+            <div className={styles.divEsquerda}>
                 <h2>Login</h2>
-                <label>
-                    Username:
-                    <input type="text" value={username} onChange={handleUsernameChange} />
-                </label>
-                <label>
-                    Password:
-                    <input type="password" value={password} onChange={handlePasswordChange} />
-                </label>
-                <Link to={`/feed`}>
-                    <button type="submit">Entrar</button>
-                </Link>
-            </form>
+                <p>Não possui conta?<Link to="/cadastro">cadastre aqui.</Link></p>
+
+                <form className={styles.formLogin} onSubmit={handleSubmit}>
+                    <label>E-mail:</label>
+                    <input
+                        type="text"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                    />
+                    <div className={styles.form_row}>
+                        <div className={styles.form_group}>
+                            <label>Senha:</label>
+                            <input
+                                type="password"
+                                name="senha"
+                                value={formData.senha}
+                                onChange={handleInputChange}
+                            />
+                        </div>
+                    </div>
+
+                    <div className={styles.divButton}>
+                        <button type="submit">Salvar</button>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 };
 
-
-export default Login
+export default Login;

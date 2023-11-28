@@ -1,4 +1,4 @@
-import styles from './App.module.css'
+// import styles from './App.module.css'
 import Home from './Paginas/Home/Home'
 // import NavBar from './Componentes/NavBar/NavBar'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
@@ -10,6 +10,7 @@ import Feed from './Paginas/Feed/Feed'
 import Usuario from './Paginas/Usuario/Usuario'
 import CadastroUsuario from './Paginas/Cadastro Usuario/CadastroUsuario'
 import EditEvents from './Paginas/Eventos/EditEvents'
+import EditUsuario from './Paginas/Cadastro Usuario/EditUsuario'
 
 function App() {
 
@@ -28,6 +29,8 @@ function App() {
             <Route path='/eventos' element={<Eventos />} />
 
             <Route exact path="/editevents/:id" element={<EditEvents/>}/>
+            <Route exact path="/editusuarios/:id" element={<EditUsuario/>}/>
+
           </Routes>
         </div>
       </div>
