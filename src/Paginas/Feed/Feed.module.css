@@ -1,0 +1,110 @@
+.mainFeed {
+    display: flex;
+    height: 91vh;
+}
+
+.menuEsquerdaFeed {
+    width: 21.6%;
+    padding: 28px;
+    background-color: #4B4569;
+    color: white;
+}
+
+.menuEsquerdaFeed .dropdown {
+    margin-bottom: 10px;
+}
+
+.menuEsquerdaFeed label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.menuEsquerdaFeed select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.menuEsquerdaFeed .icon {
+    color: #FF5834;
+}
+
+.contentFeed {
+    flex: 3;
+    padding: 20px;
+    background-color: #A4A1B3;
+    color: #4B4569;
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    /* Adicionado para centralizar verticalmente */
+
+    border: 1px solid #ccc;
+    padding: 11px 20px 12px 20px;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+
+    margin-bottom: 10px;
+}
+
+.card h2 {
+    margin: 3px 0 6px 0;
+    color: #1D1A33;
+}
+
+.cardEsquerda {
+    flex: 1;
+}
+
+.cardDireita {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/* .cardDireita a,
+.cardDireita button {
+    margin-bottom: 8px;
+} */
+
+.buttonLink {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    text-align: center;
+    width: 100%;
+    padding: 6px 10px;
+    margin-bottom: 3px;
+
+    color: white;
+    background-color: #4B4569;
+    &:hover {
+        background-color: #343048;
+        color:#FF6B38;
+    }
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.buttonDanger {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    width: 100%;
+    padding: 6px 10px;
+    margin-top: 3px;
+
+    color: #343048;
+    background-color: #FF793B;
+    &:hover {
+        background-color: #c85d2b;
+        color: white;
+    }
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}

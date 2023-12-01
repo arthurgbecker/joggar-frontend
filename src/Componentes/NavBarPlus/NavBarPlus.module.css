@@ -1,0 +1,88 @@
+.menuPlus {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1D1A33;
+    color: white;
+    padding: 20px 20px;
+}
+
+.divLeft {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    margin-right: 25px;
+    margin-left: 25px;
+}
+
+.logo img{
+    margin-bottom: -2px;
+    width: 140px;
+}
+
+.search_bar {
+    display: flex;
+}
+
+.search_bar input {
+    padding: 5px;
+    margin-right: 10px;
+}
+
+.search_bar button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.divRight {
+    display: flex;
+    align-items: center;
+}
+
+.barIcon {
+    margin-right: 25px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    transition: 0.2s;
+}
+
+a:hover {
+    color: #FF5834;
+}
+
+/* Media query para tornar o menu responsivo */
+@media (max-width: 768px) {
+    .divLeft {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search_bar {
+        margin-top: 10px;
+    }
+
+    .divRight {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .barIcon {
+        margin: 10px 0;
+    }
+}
+
+.logoutNavBar {
+    color: #524b73;
+    font-weight: bold;
+    font-size: small;
+}

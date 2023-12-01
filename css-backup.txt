@@ -1,0 +1,153 @@
+Eventos.module.css:
+
+.container {
+    display: block;
+    width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+label {
+    margin-bottom: 10px;
+}
+
+label input,
+label select,
+label textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.date_time_row {
+    display: flex;
+    /* Use display: flex para alinhar os elementos na mesma linha */
+    width: 98.2%;
+    flex-direction: row;
+    /* Define a direção como "row" para alinhar na horizontal */
+    justify-content: space-between;
+}
+
+/* Estilos para os rótulos de Data e Horário (opcional) */
+.date_time_row label {
+    width: 47.5%; /* Espaço entre os rótulos */
+}
+
+.activity_public_type_row {
+    display: flex; /* Use display: flex para alinhar os elementos na mesma linha */
+    flex-direction: row; /* Define a direção como "row" para alinhar na horizontal */
+    justify-content: space-between;
+}
+
+/* Estilos para os rótulos de Data e Horário (opcional) */
+.activity_public_type_row label {
+    width: 31%; /* Espaço entre os rótulos */
+}
+
+label.checkbox-label {
+    display: flex;
+
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Estilos para os campos de data e hora */
+label input[type="date"],
+label input[type="time"] {
+    flex: 1;
+}
+
+/* Estilos para as seleções (select) */
+label select {
+    width: 100%;
+}
+
+/* Estilos para os campos de atividade e tipo na mesma linha */
+.label-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Limpar as margens padrão em algumas partes do formulário */
+form h1,
+form p {
+    margin: 0;
+}
+
+
+----------------------Login.module.css
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .form label {
+    margin-bottom: 10px;
+  }
+  
+  .form input {
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .form button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    text-decoration: none; /* Remova o sublinhado padrão de links */
+    display: inline-block; /* Garanta que o botão Link tenha o mesmo comportamento de um botão normal */
+  }
+  
+  .form button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Estilizando o Link */
+  .form a {
+    text-decoration: none; /* Remova o sublinhado padrão de links */
+  }
+  
+  .form a button {
+    color: white; /* Cor do texto do link */
+    background-color: #4CAF50; /* Cor de fundo do link */
+  }
+  
+  .form a button:hover {
+    background-color: #45a049; /* Cor de fundo do link ao passar o mouse sobre ele */
+  }
+
+Nome, E-mail, Data de Nascimento, Gênero, Telefone, Senha, Confirmar Senha
