@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
+import api from '../../Api';
+
 import styles from './Eventos.module.css';
+import { toast } from 'react-toastify';
+
 
 
 const EditEvents = () => {
@@ -24,7 +28,7 @@ const EditEvents = () => {
     useEffect(() => {
         const fetchEvento = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/eventos/${id}`);
+                const response = await api.get(`/eventos/${id}`);
                 const eventoData = response.data;
                 setEvento(eventoData);
             } catch (error) {
@@ -48,14 +52,17 @@ const EditEvents = () => {
         const updateEvento = async () => {
             try {
                 // Verifique se a URL está correta e se o evento contém os dados corretos
-                console.log(`URL: http://localhost:8080/eventos/${id}`);
-                console.log('Evento data:', evento);
+                // console.log(`URL: http://localhost:8080/eventos/${id}`);
+                // console.log('Evento data:', evento);
 
-                const response = await axios.put(`http://localhost:8080/eventos/${id}`, evento);
+                const response = await api.put(`/eventos/${id}`, evento);
                 console.log('Response:', response.data);
                 console.log('Evento updated successfully');
+                toast.success('Evento atualizado com sucesso');
             } catch (error) {
                 console.error('Error updating evento:', error);
+                toast.error('Erro ao atualizar evento');
+
             }
         };
 

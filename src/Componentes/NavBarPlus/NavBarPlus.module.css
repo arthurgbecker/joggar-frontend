@@ -80,3 +80,9 @@ a:hover {
         margin: 10px 0;
     }
 }
+
+.logoutNavBar {
+    color: #524b73;
+    font-weight: bold;
+    font-size: small;
+}

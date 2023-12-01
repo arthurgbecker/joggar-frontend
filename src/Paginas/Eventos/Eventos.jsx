@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { Link, useNavigate} from 'react-router-dom';
+// import axios from 'axios';
 import styles from './Eventos.module.css';
+import { toast } from 'react-toastify';
+import api from '../../Api';
 
 const Eventos = () => {
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         tituloEvento: '',
         imagemEvento: '',
@@ -22,10 +26,8 @@ const Eventos = () => {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
 
-        // Faça uma cópia profunda do estado
         const updatedFormData = { ...formData };
 
-        // Atualize o estado para campos aninhados
         if (name.includes('.')) {
             const [nestedField, subField] = name.split('.');
             updatedFormData[nestedField] = { ...updatedFormData[nestedField], [subField]: value };
@@ -33,7 +35,6 @@ const Eventos = () => {
             updatedFormData[name] = value;
         }
 
-        // Atualize o estado com a cópia atualizada
         setFormData(updatedFormData);
     };
 
@@ -41,12 +42,14 @@ const Eventos = () => {
         event.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:8080/eventos', formData);
-
-            // Lógica adicional após a criação do evento (se necessário)
+            const response = await api.post('/eventos', formData);
             console.log('Evento criado:', response.data);
+            toast.success('Este alert aconteceu graças à LUARA!');
+
+            navigate('/feed');            
         } catch (error) {
             console.error('Erro ao criar evento:', error);
+            toast.error('Erro ao criar evento. Tente novamente.');
         }
     };
 

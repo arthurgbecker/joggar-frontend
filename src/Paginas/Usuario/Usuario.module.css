@@ -1,0 +1,155 @@
+.containerUsuarios {
+    display: flex;
+    flex-direction: column;
+    background-color: #fdfdfd;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+    height: 94vh;
+}
+
+.containerUsuarios h2 {
+    margin: -20px 0 0 0;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.containerUsuarios p {
+    margin: 5px;
+    margin-bottom: 30px;
+}
+
+.formCadastroUsuario {
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    border: 1px solid #ccc;
+    padding: 25px;
+    border-radius: 5px;
+    box-shadow: 0 px 4px rgba(0, 0, 0, 0.1);
+}
+
+.formCadastroUsuario label {
+    margin-bottom: 10px;
+}
+
+.formCadastroUsuario input,
+select {
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.form_row_u {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form_group_u {
+    display: flex;
+    flex-direction: column;
+}
+
+.form_group_u input {
+    width: 370px;
+    height: 34.5px;
+}
+
+.form_group_u select {
+    width: 370px;
+}
+
+.form_row_admin::before {
+    content: "";
+    position: absolute;
+    top: 39%;
+    left: 0;
+    right: 110px;
+    height: 1px;
+    background-color: #ddd;
+}
+
+.form_row_admin {
+    position: relative;
+    display: flex;
+    justify-content: end;
+}
+
+.form_row_admin input[type="checkbox"] {
+    transform: scale(1.4);
+    margin-right: 8px;
+}
+
+.divButtonUsuario {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.buttonSalvarUsuario button {
+    background-color: #FF5834;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 14px;
+    color: #221E3B;
+    opacity: 1;
+    height: 50px;
+    width: 180px;
+
+    border: 0;
+    border-radius: 2rem;
+
+    margin: 10px 10px 5px 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.buttonSalvarUsuario button:hover {
+    color: white;
+    background-color: #100F1C;
+}
+
+.buttonDeletarUsuario button {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 14px;
+    color: #221E3B;
+    opacity: 1;
+    height: 50px;
+    width: 180px;
+
+    border: 2px solid #221E3B;
+    border-radius: 2rem;
+
+    margin: 10px 10px 5px 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.buttonDeletarUsuario button:hover {
+    color: #FF5834;
+    background-color: #100F1C;
+}
+
+.botaoToastifyYes {
+    padding: 4px 10px 4px 10px;
+    color: white;
+    background-color: #FF5834;
+    border: 0;
+    border-radius: 4px;
+    margin: 5px;
+}
+
+.botaoToastifyNo {
+    padding: 4px 10px 4px 10px;
+    color: white;
+    background-color: #221E3B;
+    border: 0;
+    border-radius: 4px;
+    margin: 5px;
+}

@@ -1,6 +1,41 @@
 .containerCadastro {
+  font-family: 'Montserrat', sans-serif;
   display: flex;
   height: 94vh;
+}
+
+.containerCadastro h2 {
+  margin: -20px 0 0 0;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.containerCadastro p {
+  margin: 5px;
+  margin-bottom: 10px;
+}
+
+.formCadastro {
+  display: flex;
+  flex-direction: column;
+  width: 760px;
+  /* border: 1px solid #ccc; */
+  /* border-radius: 5px; */
+  padding: 20px;  
+  /* box-shadow: -1px -1px rgba(0, 0, 0, 0.1); */
+}
+
+.formCadastro input,
+select {
+  padding: 8px;
+  margin-bottom: 18px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.formCadastro label {
+  margin-bottom: 6px;
 }
 
 .divEsquerda {
@@ -12,7 +47,8 @@
   align-items: center;
 }
 
-.divEsquerda h2, p {
+.divEsquerda h2,
+p {
   margin: 0 0 5px 0;
 }
 
@@ -22,6 +58,45 @@
 
 .divEsquerda a:hover {
   color: #FF9441;
+}
+
+.form_row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form_group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form_group input {
+  width: 350px;
+}
+
+.form_group select {
+  width: 350px;
+}
+
+.form_row_admin::before {
+  content: "";
+  position: absolute;
+  top: 45%;
+  left: 0;
+  right: 110px;
+  height: 1px;
+  background-color: #ddd;
+}
+
+.form_row_admin {
+  position: relative;
+  display: flex;
+  justify-content: end;
+}
+
+.form_row_admin input[type="checkbox"] {
+  transform: scale(1.4);
+  margin-right: 8px;
 }
 
 .divDireita {
@@ -40,52 +115,9 @@
   margin-bottom: 20px;
 }
 
-.divDireita ul, li{
+.divDireita ul,
+li {
   line-height: 2.5;
-}
-
-.formCadastro {
-  display: flex;
-  flex-direction: column;
-  width: 800px;
-  border: 1px solid #ccc;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 px 4px rgba(0, 0, 0, 0.1);
-}
-
-.formCadastro h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.formCadastro label {
-  margin-bottom: 10px;
-}
-
-.formCadastro input, select {
-  padding: 8px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.form_row {
-  display: flex;
-  justify-content: space-between;
-}
-
-.form_group {
-  display: flex;
-  flex-direction: column;
-}
-
-.form_group input {
-  width: 370px;
-}
-
-.form_group select {
-  width: 387px;
 }
 
 .divButton {
@@ -102,12 +134,12 @@
   color: #221E3B;
   opacity: 1;
   height: 50px;
-  width: 180px;
+  width: 185px;
 
   border: 0;
   border-radius: 2rem;
- 
-  margin: 10px 0 0 0;
+
+  margin: 20px 0 0 0;
   text-align: center;
   cursor: pointer;
   transition: 0.3s;

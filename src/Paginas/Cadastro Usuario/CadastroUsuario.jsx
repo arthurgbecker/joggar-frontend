@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
 import logoImageV from '/src/Assets/Imagens/logo_joggar-vertical.png';
 
 import styles from './CadastroUsuario.module.css'
+import { toast } from 'react-toastify';
+
 
 const CadastroUsuario = () => {
-    const navigate = useNavigate(); // Adiciona o hook useNavigate
+
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         nome: '',
@@ -15,11 +18,11 @@ const CadastroUsuario = () => {
         email: '',
         senha: '',
         telefone: '',
-        isAdmin: ''
+        isAdmin: false,
     });
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
+        const { name, value, type, checked } = e.target;
 
         // Faça uma cópia profunda do estado
         const updatedFormData = { ...formData };
@@ -28,6 +31,8 @@ const CadastroUsuario = () => {
         if (name.includes('.')) {
             const [nestedField, subField] = name.split('.');
             updatedFormData[nestedField] = { ...updatedFormData[nestedField], [subField]: value };
+        } else if (type === 'checkbox') {
+            updatedFormData[name] = checked; // Seta o valor de true/false para o checkbox
         } else {
             updatedFormData[name] = value;
         }
@@ -41,14 +46,24 @@ const CadastroUsuario = () => {
 
         try {
             const response = await axios.post('http://localhost:8080/usuarios', formData);
-
-            // Lógica adicional após a criação do evento (se necessário)
             console.log('Cadastro criado com sucesso:', response.data);
-            alert('Login efetuado com sucesso');
+            const responseLogin = await axios.post('http://localhost:8080/login', {
+                email: formData.email,
+                senha: formData.senha
+            });
 
+            const { token, refreshToken } = responseLogin.data;
+
+            localStorage.setItem('token', token);
+            localStorage.setItem('refreshToken', refreshToken);
+
+            console.log('Cadastro criado com sucesso:', response.data);
+            toast.success('Cadastro efetuado com sucesso');
+           
             navigate('/preferencias');
         } catch (error) {
             console.error('Erro ao cadastrar:', error);
+            toast.error('Erro ao tentar cadastrar usuário');
         }
     };
 
@@ -118,7 +133,9 @@ const CadastroUsuario = () => {
                                 name="senha"
                                 value={formData.senha}
                                 onChange={handleInputChange}
-                            />                        </div>
+                            />
+                        </div>
+
                         <div className={styles.form_group}>
                             <label>Confirmar Senha:</label>
                             <input
@@ -126,8 +143,10 @@ const CadastroUsuario = () => {
                                 name="confirmaSenha"
                             />
                         </div>
-                        
-                        <label>ADM:</label>
+                    </div>
+
+                    <div className={styles.form_row_admin}>
+                        <label>Admin: &nbsp;</label>
                         <input
                             type="checkbox"
                             name="isAdmin"
@@ -135,12 +154,11 @@ const CadastroUsuario = () => {
                             onChange={handleInputChange}
                         >
                         </input>
-
                     </div>
 
                     <div className={styles.divButton}>
                         <Link to="/preferencias">
-                            <button onClick={handleSubmit}>Salvar</button>
+                            <button onClick={handleSubmit}>Cadastrar</button>
                         </Link>
                     </div>
                 </form>

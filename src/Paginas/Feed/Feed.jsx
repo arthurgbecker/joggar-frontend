@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHouse, faUserGroup, faCirclePlus, faBell, faUser, faClock, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+// import { library } from '@fortawesome/fontawesome-svg-core';
+import { faClock, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 // library.add(faHouse, faUserGroup, faCirclePlus, faBell, faUser);
 
-import axios from 'axios';
+import api from '../../Api';
+// import axios from 'axios';
 import FormatoData from '../../Componentes/FormatoData/FormatoData';
 import styles from './Feed.module.css';
+import { toast } from 'react-toastify';
+
 
 const Feed = () => {
 
@@ -18,15 +21,15 @@ const Feed = () => {
     }, []);
 
     const loadEventos = async () => {
-        const result = await axios.get("http://localhost:8080/eventos");
+        const result = await api.get("/eventos");
         setEventos(result.data);
-        console.log(result.data);
+        // console.log(result.data);
     }
 
     useEffect(() => {
         const fetchEventos = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/eventos');
+                const response = await api.get('/eventos');
                 if (response.data.length > 0) {
                     setEventos(response.data);
                 } else {
@@ -41,29 +44,18 @@ const Feed = () => {
     }, []);
 
     const dropdownOptions = [
-        ["Opção 1", "Opção 2", "Opção 3"],
-        ["Opção A", "Opção B", "Opção C"],
-        ["Item X", "Item Y", "Item Z"],
-        ["Escolha A", "Escolha B", "Escolha C"],
-        ["Categoria 1", "Categoria 2", "Categoria 3"],
+        ["Procure por Atividade:", "Futebol", "Vôlei", "Basquete", "Capoeira", "Ciclismo", "Corrida"],
+        ["Público: Aberto a Todos", "Masculino", "Feminino"],
+        ["Presencial ou Virtual?", "Presencial", "Virtual"],
+        ["Procure por data:", "Aqui vai a data"],
+        ["Local ou Bairro:", "Centro", "Agronômica", "Trindade", "Córrego Grande", "Saco dos Limões", "João Paulo", "Campeche", "Outro"],
     ];
 
-    // const getAxios = async () => {
-    //     console.log("teste da api com get")
-    // };
-
-    // const deleteAxios = async () => {
-    //     console.log("teste da api com delete")
-    // };
-
-    // useEffect(() => {
-    //     getAxios();
-    //     deleteAxios();
-    // }, []);
 
     // Função para deletar um evento
     const deleteEvento = async (id) => {
-        await axios.delete(`http://localhost:8080/eventos/${id}`);
+        await api.delete(`http://localhost:8080/eventos/${id}`);
+        toast.success('Evento deletado. Bora criar outro?');
         loadEventos();
     }
 
@@ -109,33 +101,30 @@ const Feed = () => {
                         ))}
                     </select>
                 </div>
-                <FontAwesomeIcon className={styles.icon} icon={faHouse} size='lg' />
             </div>
 
 
-
             <div className={styles.contentFeed}>
-
                 {eventos.map((evento) => (
-
-
 
                     <div key={evento.id} className={styles.card}>
 
                         <div className={styles.cardEsquerda}>
                             <h2>{evento.tituloEvento}</h2>
                             <p>Descrição: {evento.descricaoEvento}</p>
-                            <p><FontAwesomeIcon icon={faClock} /> <FormatoData dataEvento={evento.dataEvento} />, às {evento.horaEvento} |&nbsp; 
+                            <p><FontAwesomeIcon icon={faClock} /> <FormatoData dataEvento={evento.dataEvento} />, às {evento.horaEvento} |&nbsp;
                                 <FontAwesomeIcon icon={faLocationDot} /> {evento.endereco.local}</p>
                         </div>
                         <div className={styles.cardDireita}>
 
-                            <Link className='btn btn-outline-primary mx-2' to={`/editevents/${evento.id}`}>
+                            <Link className={styles.buttonLink} to={`/editevents/${evento.id}`}>
                                 Editar
                             </Link>
-                            <button className='btn btn-danger mx-2' onClick={() => deleteEvento(evento.id)}>
+
+                            <button className={styles.buttonDanger} onClick={() => deleteEvento(evento.id)}>
                                 Deletar
                             </button>
+
                         </div>
                     </div>
                 ))}
